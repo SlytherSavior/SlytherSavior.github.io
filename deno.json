@@ -1,0 +1,28 @@
+{
+  "tasks": {
+    "dev": "npm run dev",
+    "build": "npm run build",
+    "preview": "npm run preview",
+    "format": "deno fmt src/ --ignore=node_modules,build,.svelte-kit",
+    "lint": "deno lint src/ --ignore=node_modules,build,.svelte-kit",
+    "type-check": "deno check src/**/*.ts",
+    "serve": "deno run --allow-net --allow-read https://deno.land/std/http/file_server.ts build/"
+  },
+  "fmt": {
+    "exclude": [
+      "node_modules/",
+      ".svelte-kit/",
+      "build/",
+      "static/",
+      "package*.json"
+    ]
+  },
+  "lint": {
+    "exclude": [
+      "node_modules/",
+      ".svelte-kit/",
+      "build/",
+      "static/"
+    ]
+  }
+}
