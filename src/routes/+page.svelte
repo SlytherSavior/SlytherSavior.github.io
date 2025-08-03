@@ -1,6 +1,10 @@
 <script lang="ts">
 	import Navigation from '$lib/components/Navigation.svelte';
 	import Hero from '$lib/components/Hero.svelte';
+	import Skills from '$lib/components/Skills.svelte';
+	import Projects from '$lib/components/Projects.svelte';
+	import Contact from '$lib/components/Contact.svelte';
+	import About from '$lib/components/About.svelte';
 </script>
 
 <svelte:head>
@@ -13,6 +17,9 @@
 
 <main class="scroll-smooth">
 	<Hero />
+	<About />
+
+	<Contact />
 </main>
 
 <footer class="bg-gray-900 text-white py-8">
