@@ -19,7 +19,7 @@
 			name: 'GitHub',
 			url: 'https://github.com/SlytherSavior',
 			icon: '⟨code⟩',
-			description: 'Open Source Projects & AI Libraries',
+			description: 'Coding Projects and Open Source Contributions',
 			color: 'from-gray-600 to-gray-800',
 			hoverColor: 'from-gray-700 to-gray-900'
 		},
