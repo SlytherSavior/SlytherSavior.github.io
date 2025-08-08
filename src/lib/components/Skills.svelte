@@ -1,21 +1,18 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    
+
     let particleSystem = $state<Array<{id: number, x: number, y: number, vx: number, vy: number, size: number, color: string}>>([]);
     let hoveredSkill = $state<string | null>(null);
-    
-    // Mathematical/AI focused skill categories
+
     const skillCategories = [
         {
-            title: "Pure Mathematics",
-            icon: "∫",
+            title: "Mathematics",
+            icon: "∑",
             color: "from-blue-500 to-cyan-500",
             skills: [
-                { name: "Calculus & Analysis", level: 95, formula: "∫ᵃᵇ f(x)dx" },
-                { name: "Linear Algebra", level: 92, formula: "Ax = λx" },
-                { name: "Number Theory", level: 88, formula: "p ≡ 1 (mod 4)" },
-                { name: "Abstract Algebra", level: 85, formula: "(G, ∘)" },
-                { name: "Topology", level: 80, formula: "∂(A ∪ B) ⊆ ∂A ∪ ∂B" }
+                { name: "Calculus", level: 90, formula: "∫ f(x) dx" },
+                { name: "Linear Algebra", level: 85, formula: "Ax = λx" },
+                { name: "Probability", level: 82, formula: "P(A|B) = P(B|A)P(A)/P(B)" },
             ]
         },
         {
@@ -23,60 +20,76 @@
             icon: "🧠",
             color: "from-purple-500 to-pink-500",
             skills: [
-                { name: "Machine Learning", level: 90, formula: "J(θ) = ½∑(hθ(x) - y)²" },
-                { name: "Deep Learning", level: 88, formula: "σ(z) = 1/(1+e⁻ᶻ)" },
-                { name: "Neural Networks", level: 85, formula: "y = f(∑wᵢxᵢ + b)" },
-                { name: "Natural Language Processing", level: 82, formula: "P(w|context)" },
-                { name: "Computer Vision", level: 78, formula: "Conv(I * K)" }
+                { name: "YOLO & Object Detection", level: 88, formula: "YOLOv5 → bbox" },
+                { name: "OpenCV", level: 85, formula: "cv2.imread()" },
+                { name: "NLP", level: 80, formula: "P(w|context)" },
             ]
         },
         {
-            title: "Data Science & Analytics",
-            icon: "�",
+            title: "Backend & APIs",
+            icon: "⚙️",
             color: "from-green-500 to-emerald-500",
             skills: [
-                { name: "Statistical Analysis", level: 93, formula: "μ = E[X]" },
-                { name: "Probability Theory", level: 90, formula: "P(A|B) = P(B|A)P(A)/P(B)" },
-                { name: "Data Visualization", level: 87, formula: "f: D → V" },
-                { name: "Regression Analysis", level: 85, formula: "y = βx + ε" },
-                { name: "Time Series", level: 80, formula: "ARIMA(p,d,q)" }
+                { name: "Flask", level: 90, formula: "@app.route()" },
+                { name: "PostgreSQL", level: 85, formula: "SELECT * FROM users" },
+                { name: "Redis", level: 80, formula: "SET key value" },
+                { name: "JWT & Crypto", level: 88, formula: "HS256 & AES" },
+            ]
+        },
+        {
+            title: "Software & Teaching",
+            icon: "💻",
+            color: "from-yellow-500 to-orange-500",
+            skills: [
+                { name: "iOS App (React Native)", level: 80, formula: "expo + nativewind" },
+                { name: "Electron.js", level: 78, formula: "main.js + preload.js" },
+                { name: "Teaching", level: 85, formula: "Explain like I'm 5" },
+            ]
+        },
+        {
+            title: "Development & Tools",
+            icon: "🛠️",
+            color: "from-pink-500 to-red-500",
+            skills: [
+                { name: "Discord Bots", level: 83, formula: "client.on('message')" },
+                { name: "Full Stack Dev", level: 87, formula: "MERN + Tailwind" },
+                { name: "Git & Linux", level: 85, formula: "git push && chmod" },
             ]
         }
     ];
-    
+
     const achievements = [
         {
-            title: "Mathematical Research",
-            description: "Published papers in applied mathematics",
-            icon: "📝",
-            metric: "∑ᵢ₌₁ⁿ citations",
-            color: "from-blue-500 to-purple-500"
-        },
-        {
-            title: "AI Model Development",
-            description: "Developed neural network architectures",
-            icon: "🤖",
-            metric: "accuracy → 95%",
+            title: "Built Authentication System",
+            description: "Secure login flow with JWT and Redis",
+            icon: "🔐",
+            metric: "Sessions secured",
             color: "from-purple-500 to-pink-500"
         },
         {
-            title: "Teaching Excellence",
-            description: "Mathematics & AI education programs",
-            icon: "🎓",
-            metric: "∀ students ∈ success",
-            color: "from-green-500 to-emerald-500"
+            title: "Mathematics Projects",
+            description: "Applied math concepts in code",
+            icon: "📘",
+            metric: "Concepts implemented",
+            color: "from-blue-500 to-cyan-500"
         },
         {
-            title: "Problem Solving",
-            description: "Complex mathematical challenges",
-            icon: "💡",
-            metric: "lim(solutions) → ∞",
-            color: "from-orange-500 to-red-500"
+            title: "Cross-platform Software",
+            description: "Created Electron.js and iOS apps",
+            icon: "🖥️",
+            metric: "Apps built",
+            color: "from-yellow-500 to-orange-500"
+        },
+        {
+            title: "Open Source Contributions",
+            description: "Actively involved in OSS community",
+            icon: "🌍",
+            metric: "Repos contributed",
+            color: "from-green-500 to-emerald-500"
         }
     ];
-    
+
     onMount(() => {
-        // Initialize particle system
         particleSystem = Array.from({length: 30}, (_, i) => ({
             id: i,
             x: Math.random() * 100,
@@ -86,7 +99,7 @@
             size: Math.random() * 3 + 1,
             color: ['#3B82F6', '#8B5CF6', '#10B981', '#F59E0B'][Math.floor(Math.random() * 4)]
         }));
-        
+
         const particleInterval = setInterval(() => {
             particleSystem = particleSystem.map(particle => ({
                 ...particle,
@@ -94,12 +107,14 @@
                 y: (particle.y + particle.vy + 100) % 100
             }));
         }, 50);
-        
+
         return () => {
             clearInterval(particleInterval);
         };
     });
 </script>
+
+
 
 <section id="skills" class="py-20 bg-gradient-to-br from-gray-900 via-slate-900 to-black relative overflow-hidden">
     <!-- Animated Particle Background -->
@@ -186,7 +201,7 @@
         <div class="bg-black/40 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 mb-12">
             <h3 class="text-3xl font-bold text-white mb-8 text-center flex items-center justify-center">
                 <span class="text-yellow-400 font-mono text-4xl mr-3">∑</span>
-                Mathematical Achievements
+                Areas of Achievement
                 <span class="text-yellow-400 font-mono text-4xl ml-3">∏</span>
             </h3>
             
@@ -222,19 +237,19 @@
                 <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-2 font-mono">
                     e^π
                 </div>
-                <div class="text-gray-300 group-hover:text-white transition-colors">AI Models Developed</div>
+                <div class="text-gray-300 group-hover:text-white transition-colors">Projects Completed</div>
             </div>
             <div class="text-center group cursor-pointer hover:scale-105 transition-transform duration-300">
                 <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 mb-2 font-mono">
                     φ²
                 </div>
-                <div class="text-gray-300 group-hover:text-white transition-colors">Research Publications</div>
+                <div class="text-gray-300 group-hover:text-white transition-colors">Areas of Interest</div>
             </div>
             <div class="text-center group cursor-pointer hover:scale-105 transition-transform duration-300">
                 <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400 mb-2 font-mono">
                     √π
                 </div>
-                <div class="text-gray-300 group-hover:text-white transition-colors">Excellence Rating</div>
+                <div class="text-gray-300 group-hover:text-white transition-colors">Lines of Code</div>
             </div>
         </div>
     </div>

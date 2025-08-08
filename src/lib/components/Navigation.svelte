@@ -9,7 +9,7 @@
 	const navItems = [
 		{ name: 'Home', href: '#home', symbol: '∅' },
 		{ name: 'About', href: '#about', symbol: '∃' },
-		// { name: 'Skills', href: '#skills', symbol: '∇' },
+		{ name: 'Skills', href: '#skills', symbol: '∇' },
 		// { name: 'Projects', href: '#projects', symbol: '∏' },
 		{ name: 'Contact', href: '#contact', symbol: '∑' }
 	];

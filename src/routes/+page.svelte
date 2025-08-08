@@ -18,6 +18,7 @@
 <main class="scroll-smooth">
 	<Hero />
 	<About />
+	<Skills />
 
 	<Contact />
 </main>
